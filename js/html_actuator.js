@@ -54,34 +54,34 @@
 
         switch(value) {
         case 1:
-            inner.textContent = "See Barbara";
+            result= "See Barbara";
             break;
         case 2:
-            inner.textContent = "See Esther";
+            result = "See Esther";
             break;
         case 3:
-            inner.textContent = "See Aline";
+            result = "See Aline";
             break;
         case 4:
-            inner.textContent = "See Stephanie";
+            result = "See Stephanie";
             break;
         case 5:
-            inner.textContent = "See Patricia";
+            result = "See Patricia";
             break;
         case 6:
-            inner.textContent = "See Lydie";
+            result = "See Lydie";
             break;
         case 7:
-            inner.textContent = "See Lydie";
+            result = "See Lydie";
             break;
         case 8:
-            inner.textContent = "See Denise";
+            result = "See Denise";
             break;
         case 9:
-            inner.textContent = "See Merel";
+            result = "See Merel";
             break;
         case 10:
-            inner.textContent = "See Sofie";
+            result = "See Sofie";
             break;     
         default:
             break;
