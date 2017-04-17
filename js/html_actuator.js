@@ -46,6 +46,51 @@
       }
     };
 
+    function generatePromotor(){
+
+        var value = Math.floor((Math.random() * 10) + 1);
+
+        var result = "Read paper"
+
+        switch(value) {
+        case 1:
+            result= "See Nicky";
+            break;
+        case 2:
+            result = "See Nicky";
+            break;
+        case 3:
+            result = "See Nicky";
+            break;
+        case 4:
+            result = "See Nicky";
+            break;
+        case 5:
+            result = "See Sofie";
+            break;
+        case 6:
+            result = "See Sofie";
+            break;
+        case 7:
+            result = "See Sofie";
+            break;
+        case 8:
+            result = "See Elise";
+            break;
+        case 9:
+            result = "See Elise";
+            break;
+        case 10:
+            result = "See Elise";
+            break;     
+        default:
+            break;
+           }
+
+            return result;
+
+    }
+
     function generateSeePerson(){
 
         var value = Math.floor((Math.random() * 10) + 1);
@@ -57,31 +102,31 @@
             result= "See Barbara";
             break;
         case 2:
-            result = "See Esther";
+            result = "See Barbara";
             break;
         case 3:
-            result = "See Aline";
+            result = "See Patricia";
             break;
         case 4:
-            result = "See Stephanie";
+            result = "See Patricia";
             break;
         case 5:
-            result = "See Patricia";
+            result = "See Lydie";
             break;
         case 6:
             result = "See Lydie";
             break;
         case 7:
-            result = "See Lydie";
+            result = "See Denise";
             break;
         case 8:
             result = "See Denise";
             break;
         case 9:
-            result = "See Merel";
+            result = "See Esther";
             break;
         case 10:
-            result = "See Sofie";
+            result = "See Esther";
             break;     
         default:
             break;
@@ -117,14 +162,32 @@
             inner.textContent = generateSeePerson();
             break;
         case 8:
-            inner.textContent = "Eureka !!!";
+            inner.textContent = "Drink tea";
             break;
         case 16:
-            inner.textContent = "See Nicky";
+            inner.textContent = "Eureka!!!";
             break;
         case 32:
-            inner.textContent = "Make Survey";
-            break;      
+            inner.textContent = generatePromotor();
+            break;
+        case 64:
+            inner.textContent = "Hypothese";
+            break;
+        case 128:
+            inner.textContent = "Scenario";
+            break;    
+        case 256:
+            inner.textContent = "Survey";
+            break;          
+        case 512:
+            inner.textContent = "SPSS";
+            break;  
+        case 1024:
+            inner.textContent = "Findings";
+            break; 
+        case 2048:
+            inner.textContent = "Paper";
+            break;       
         default:
             inner.textContent = "Read paper";
             break;
@@ -193,7 +256,7 @@
 
     HTMLActuator.prototype.message = function (won) {
       var type    = won ? "game-won" : "game-over";
-      var message = won ? "You win!" : "Game over!";
+      var message = won ? "You finished the PHD!!!" : "Game over!";
 
       this.messageContainer.classList.add(type);
       this.messageContainer.getElementsByTagName("p")[0].textContent = message;
