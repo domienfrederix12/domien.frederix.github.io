@@ -66,13 +66,13 @@
             result = "See Nicky";
             break;
         case 5:
-            result = "See Sofie";
+            result = "See Sophie";
             break;
         case 6:
-            result = "See Sofie";
+            result = "See Nicky";
             break;
         case 7:
-            result = "See Sofie";
+            result = "See Sophie";
             break;
         case 8:
             result = "See Elise";
@@ -81,7 +81,7 @@
             result = "See Elise";
             break;
         case 10:
-            result = "See Elise";
+            result = "See Sophie";
             break;     
         default:
             break;
@@ -155,9 +155,12 @@
       inner.classList.add("tile-inner");
 
       switch(value) {
+        case 1:
+            inner.textContent = "Explain";
+            break;
         case 2:
             inner.textContent = "Read paper";
-            break;
+            break;                  
         case 4:
             inner.textContent = generateSeePerson();
             break;
@@ -167,6 +170,9 @@
         case 16:
             inner.textContent = "Eureka!!!";
             break;
+        case 25:
+            inner.textContent = "Conference";
+            break;      
         case 32:
             inner.textContent = generatePromotor();
             break;
