@@ -156,7 +156,7 @@
 
       switch(value) {
         case 1:
-            inner.textContent = "Explain";
+            inner.textContent = "Great Tea";
             break;
         case 2:
             inner.textContent = "Read paper";
@@ -170,7 +170,7 @@
         case 16:
             inner.textContent = "Eureka!!!";
             break;
-        case 25:
+        case 50:
             inner.textContent = "Conference";
             break;      
         case 32:
