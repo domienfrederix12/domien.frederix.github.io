@@ -197,7 +197,6 @@ GameManager.prototype.move = function (direction) {
             if (merged.value === 2048) self.won = true;
           }
           else if (next && next.value !== tile.value && !next.mergedFrom ) {
-            console.log("check");
             if (tile.value === 1 && next.value < 34) {
               var merged = new Tile(positions.next, next.value * 2);
               merged.mergedFrom = [tile, next];
