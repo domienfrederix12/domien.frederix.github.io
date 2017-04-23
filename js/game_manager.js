@@ -44,18 +44,21 @@ GameManager.prototype.setup = function () {
     this.won = previousState.won;
     this.keepPlaying = previousState.keepPlaying;
   } else {
-    this.grid = new Grid(this.size);
-    this.score = 0;
-    this.over = false;
-    this.won = false;
-    this.keepPlaying = false;
-
-    // Add the initial tiles
-    this.addStartTiles();
+    if (this.player === undefined) { 
+    this.player = prompt("What is your name ?");
   }
+  this.grid = new Grid(this.size);
+  this.score = 0;
+  this.over = false;
+  this.won = false;
+  this.keepPlaying = false;
 
-  // Update the actuator
-  this.actuate();
+  // Add the initial tiles
+  this.addStartTiles();
+}
+
+// Update the actuator
+this.actuate();
 };
 
 // Set up the initial tiles to start the game with
@@ -169,7 +172,7 @@ GameManager.prototype.move = function (direction) {
             self.score += 25;
           }
         }
-      
+
         else {
 
           // Only one merger per row traversal?
@@ -196,7 +199,7 @@ GameManager.prototype.move = function (direction) {
             // The mighty 2048 tile
             if (merged.value === 2048) self.won = true;
           }
-          else if (next && next.value !== tile.value && !next.mergedFrom ) {
+          else if (next && next.value !== tile.value && !next.mergedFrom) {
             if (tile.value === 1 && next.value < 34) {
               var merged = new Tile(positions.next, next.value * 2);
               merged.mergedFrom = [tile, next];
@@ -247,12 +250,12 @@ GameManager.prototype.move = function (direction) {
               // The mighty 2048 tile
               if (merged.value === 2048) self.won = true;
 
-            }else {
-            self.moveTile(tile, positions.farthest);
-          }
+            } else {
+              self.moveTile(tile, positions.farthest);
+            }
 
 
-            
+
 
 
           }
@@ -274,12 +277,63 @@ GameManager.prototype.move = function (direction) {
     this.addRandomTile();
 
     if (!this.movesAvailable()) {
+
+      var url = "https://shielded-badlands-59010.herokuapp.com/";
+      var method = "POST";
+      var postData = "";
+      var async = true;
+      var request = new createCORSRequest(method, url);
+      var params = "&name=" + self.player +"&score=" + self.score + "";
+
+      if (!request) {
+        console.log('CORS not supported');
+      }
+      else {
+        request.onerror = function () {
+          console.log('There was an error with the CORS request!');
+        };
+
+        request.onreadystatechange = function () {
+          if (request.readyState == XMLHttpRequest.DONE) {
+            console.log("http response : " + request.responseText);
+          }
+        };
+
+        request.open(method, url, async);
+        request.send(params);
+      }
+
       this.over = true; // Game over!
     }
 
     this.actuate();
   }
 };
+
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+
+    // Check if the XMLHttpRequest object has a "withCredentials" property.
+    // "withCredentials" only exists on XMLHTTPRequest2 objects.
+    xhr.open(method, url, true);
+
+  } else if (typeof XDomainRequest != "undefined") {
+
+    // Otherwise, check if XDomainRequest.
+    // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+
+  } else {
+
+    // Otherwise, CORS is not supported by the browser.
+    xhr = null;
+
+  }
+  return xhr;
+}
+
 
 // Get the vector representing the chosen direction
 GameManager.prototype.getVector = function (direction) {
