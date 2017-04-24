@@ -156,11 +156,14 @@
 
       switch(value) {
         case 1:
-            inner.textContent = "Great Tea";
+            inner.textContent = "Good Tea";
             break;
         case 2:
             inner.textContent = "Read paper";
-            break;                  
+            break;  
+        case 3:
+            inner.textContent = "Gold Coffee";
+            break;        
         case 4:
             inner.textContent = generateSeePerson();
             break;
@@ -186,13 +189,13 @@
             inner.textContent = "Survey";
             break;          
         case 512:
-            inner.textContent = "SPSS";
+            inner.textContent = "Findings";
             break;  
         case 1024:
-            inner.textContent = "Findings";
+            inner.textContent = "Paper";
             break; 
         case 2048:
-            inner.textContent = "Paper";
+            inner.textContent = "Phd";
             break;       
         default:
             inner.textContent = "Read paper";

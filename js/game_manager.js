@@ -72,14 +72,17 @@ GameManager.prototype.addStartTiles = function () {
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
     var value = Math.random();
-    if (value < 0.9) {
+    if (value < 0.86) {
       value = 2;
     }
-    else if (value < 0.99) {
+    else if (value < 0.92) {
+      value = 3;
+    }
+    else if (value < 0.95) {
       value = 1;
     }
     else {
-      value = 4;
+      value = 2;
     }
     var tile = new Tile(this.grid.randomAvailableCell(), value);
 
@@ -166,11 +169,7 @@ GameManager.prototype.move = function (direction) {
         var randomNumber = Math.random();
 
         if (tile.value == 25) {
-          var value = Math.random();
-          if (value < 0.9) {
-            self.grid.removeTile(tile);
-            self.score += 25;
-          }
+         
         }
 
         else {
@@ -181,8 +180,12 @@ GameManager.prototype.move = function (direction) {
               var merged = new Tile(positions.next, tile.value * 2);
 
             }
-            else {
-              var merged = new Tile(positions.next, 25);
+            else if( value === 3){
+              var merged = new Tile(positions.next, 50);
+            }
+            else
+            {
+              var merged = new Tile(positions.next, 50);
             }
 
             merged.mergedFrom = [tile, next];
@@ -217,6 +220,40 @@ GameManager.prototype.move = function (direction) {
               if (merged.value === 2048) self.won = true;
 
             }
+            else if (tile.value === 3 && next.value === 1) {
+              var merged = new Tile(positions.next, 50);
+              merged.mergedFrom = [tile, next];
+
+              self.grid.insertTile(merged);
+              self.grid.removeTile(tile);
+
+              // Converge the two tiles' positions
+              tile.updatePosition(positions.next);
+
+              // Update the score
+              self.score += merged.value;
+
+              // The mighty 2048 tile
+              if (merged.value === 2048) self.won = true;
+
+            }
+            else if (tile.value === 1 && next.value === 3) {
+              var merged = new Tile(positions.next, 50);
+              merged.mergedFrom = [tile, next];
+
+              self.grid.insertTile(merged);
+              self.grid.removeTile(tile);
+
+              // Converge the two tiles' positions
+              tile.updatePosition(positions.next);
+
+              // Update the score
+              self.score += merged.value;
+
+              // The mighty 2048 tile
+              if (merged.value === 2048) self.won = true;
+
+            }  
             else if (tile.value < 34 && next.value === 1) {
               var merged = new Tile(positions.next, tile.value * 2);
               merged.mergedFrom = [tile, next];
@@ -234,6 +271,40 @@ GameManager.prototype.move = function (direction) {
               if (merged.value === 2048) self.won = true;
 
             }
+            else if (tile.value === 3 && next.value < 34) {
+              var merged = new Tile(positions.next, next.value * 4);
+              merged.mergedFrom = [tile, next];
+
+              self.grid.insertTile(merged);
+              self.grid.removeTile(tile);
+
+              // Converge the two tiles' positions
+              tile.updatePosition(positions.next);
+
+              // Update the score
+              self.score += merged.value;
+
+              // The mighty 2048 tile
+              if (merged.value === 2048) self.won = true;
+
+            }
+            else if (tile.value < 34 && next.value === 3) {
+              var merged = new Tile(positions.next, tile.value * 4);
+              merged.mergedFrom = [tile, next];
+
+              self.grid.insertTile(merged);
+              self.grid.removeTile(tile);
+
+              // Converge the two tiles' positions
+              tile.updatePosition(positions.next);
+
+              // Update the score
+              self.score += merged.value;
+
+              // The mighty 2048 tile
+              if (merged.value === 2048) self.won = true;
+
+            }  
             else if (tile.value === 50) {
               var merged = new Tile(positions.next, next.value * 2);
               merged.mergedFrom = [tile, next];
@@ -283,8 +354,12 @@ GameManager.prototype.move = function (direction) {
       var postData = "";
       var async = true;
       var request = new createCORSRequest(method, url);
-      var params = "&name=" + self.player +"&score=" + self.score + "";
-
+      var dataObject = {
+            player: self.player,
+            score: self.score,
+      };
+      var data = JSON.stringify(dataObject);
+  
       if (!request) {
         console.log('CORS not supported');
       }
@@ -300,7 +375,7 @@ GameManager.prototype.move = function (direction) {
         };
 
         request.open(method, url, async);
-        request.send(params);
+        request.send(data);
       }
 
       this.over = true; // Game over!
