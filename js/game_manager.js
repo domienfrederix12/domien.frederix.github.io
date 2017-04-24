@@ -370,11 +370,12 @@ GameManager.prototype.move = function (direction) {
 
         request.onreadystatechange = function () {
           if (request.readyState == XMLHttpRequest.DONE) {
-            console.log("http response : " + request.responseText);
+            console.log("Http response : " + request.responseText);
           }
         };
 
         request.open(method, url, async);
+        request.setRequestHeader("Content-Type", "application/json");
         request.send(data);
       }
 
