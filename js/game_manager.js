@@ -355,7 +355,7 @@ GameManager.prototype.move = function (direction) {
       var async = true;
       var request = new createCORSRequest(method, url);
       var dataObject = {
-            player: self.player,
+            name: self.player,
             score: self.score,
       };
       var data = JSON.stringify(dataObject);
