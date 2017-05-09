@@ -2,6 +2,7 @@
       this.tileContainer    = document.querySelector(".tile-container");
       this.scoreContainer   = document.querySelector(".score-container");
       this.bestContainer    = document.querySelector(".best-container");
+      this.dailyContainer   = document.querySelector(".daily-container");
       this.messageContainer = document.querySelector(".game-message");
 
       this.score = 0;
@@ -23,6 +24,7 @@
 
         self.updateScore(metadata.score);
         self.updateBestScore(metadata.bestScore);
+        self.updateDailyScore(metadata.dailyScore);
 
         if (metadata.terminated) {
           if (metadata.over) {
@@ -261,6 +263,10 @@
 
     HTMLActuator.prototype.updateBestScore = function (bestScore) {
       this.bestContainer.textContent = bestScore;
+    };
+
+    HTMLActuator.prototype.updateDailyScore = function (dailyScore) {
+      this.dailyContainer.textContent = dailyScore;
     };
 
     HTMLActuator.prototype.message = function (won) {

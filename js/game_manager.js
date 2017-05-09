@@ -354,8 +354,13 @@ GameManager.prototype.move = function (direction) {
       var postData = "";
       var async = true;
       var request = new createCORSRequest(method, url);
+
+      if (self.player === undefined) {
+          self.player = prompt("What is your name ?");
+      };
+
       var dataObject = {
-            name: self.player,
+            player: self.player,
             score: self.score,
       };
       var data = JSON.stringify(dataObject);

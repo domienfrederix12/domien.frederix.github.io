@@ -64,7 +64,7 @@ h1.title {
   text-align: right;
 }
 
-.score-container, .best-container {
+.score-container, .best-container, .daily-container {
   $height: 25px;
 
   position: relative;
@@ -111,7 +111,11 @@ h1.title {
 }
 
 .best-container:after {
-  content: "Best"
+  content: "Your Best"
+}
+
+.daily-container:after {
+  content: "All Time Best"
 }
 
 p {
@@ -500,7 +504,7 @@ hr {
     margin: 0 auto;
   }
 
-  .score-container, .best-container {
+  .score-container, .best-container, .daily-container {
     margin-top: 0;
     padding: 15px 10px;
     min-width: 40px;
